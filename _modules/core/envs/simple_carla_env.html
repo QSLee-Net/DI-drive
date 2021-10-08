@@ -1,74 +1,34 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>core.envs.simple_carla_env &mdash; DI-drive 0.1.0.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>core.envs.simple_carla_env &mdash; DI-drive 0.1.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link href="../../../_static/css/style.css" rel="stylesheet" type="text/css">
-
+    <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../../index.html" class="icon icon-home"> DI-drive
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                0.1.0.1
+                0.1.3
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -76,18 +36,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation/index.html">Installation</a></li>
 </ul>
@@ -107,69 +56,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../faq/index.html">FAQ</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">DI-drive</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../../index.html">Module code</a> &raquo;</li>
-        
       <li>core.envs.simple_carla_env</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for core.envs.simple_carla_env</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -177,6 +87,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">from</span> <span class="nn">gym</span> <span class="kn">import</span> <span class="n">spaces</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
 <span class="kn">from</span> <span class="nn">.base_carla_env</span> <span class="kn">import</span> <span class="n">BaseCarlaEnv</span>
 <span class="kn">from</span> <span class="nn">core.simulators</span> <span class="kn">import</span> <span class="n">CarlaSimulator</span>
@@ -207,6 +118,7 @@
 <span class="sd">        - hero_player (carla.Actor): Hero vehicle in simulator.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;render.modes&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rgb_array&#39;</span><span class="p">]}</span>
     <span class="n">action_space</span> <span class="o">=</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Dict</span><span class="p">({})</span>
     <span class="n">observation_space</span> <span class="o">=</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Dict</span><span class="p">({})</span>
     <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
@@ -220,8 +132,8 @@
         <span class="n">off_route_is_failure</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">off_route_distance</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
         <span class="n">success_distance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">success_reward</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
         <span class="n">stuck_len</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
-        <span class="n">finish_reward</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
         <span class="n">max_speed</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
         <span class="n">visualize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span>
@@ -232,6 +144,7 @@
             <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
             <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">9000</span><span class="p">,</span>
             <span class="n">tm_port</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">carla_timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mf">60.0</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -243,6 +156,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_carla_host</span> <span class="o">=</span> <span class="n">host</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_carla_port</span> <span class="o">=</span> <span class="n">port</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_carla_tm_port</span> <span class="o">=</span> <span class="n">tm_port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_carla_timeout</span> <span class="o">=</span> <span class="n">carla_timeout</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_use_local_carla</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_carla_host</span> <span class="o">!=</span> <span class="s1">&#39;localhost&#39;</span><span class="p">:</span>
@@ -259,7 +173,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_off_route_distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cfg</span><span class="o">.</span><span class="n">off_route_distance</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_success_distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cfg</span><span class="o">.</span><span class="n">success_distance</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_finish_reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cfg</span><span class="o">.</span><span class="n">finish_reward</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_success_reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cfg</span><span class="o">.</span><span class="n">success_reward</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cfg</span><span class="o">.</span><span class="n">max_speed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_collided</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stuck</span> <span class="o">=</span> <span class="kc">False</span>
@@ -286,10 +200,11 @@
                 <span class="n">client</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_carla_host</span><span class="p">,</span>
                 <span class="n">port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_carla_port</span><span class="p">,</span>
-                <span class="n">tm_port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_carla_tm_port</span>
+                <span class="n">tm_port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_carla_tm_port</span><span class="p">,</span>
+                <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_carla_timeout</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------ Using Promote carla @ </span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1"> ------&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_carla_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_carla_port</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------ Using Remote carla @ </span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1"> ------&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_carla_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_carla_port</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulator</span> <span class="o">=</span> <span class="n">CarlaSimulator</span><span class="p">(</span>
                 <span class="n">cfg</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_simulator_cfg</span><span class="p">,</span>
                 <span class="n">client</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -364,6 +279,8 @@
         <span class="k">if</span> <span class="n">action</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulator</span><span class="o">.</span><span class="n">apply_control</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">action</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_simulator</span><span class="o">.</span><span class="n">run_step</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tick</span> <span class="o">+=</span> <span class="mi">1</span>
 
@@ -467,12 +384,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;navigation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">navigation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;information&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">information</span>
+        <span class="k">if</span> <span class="s1">&#39;action&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">navigation</span><span class="p">[</span><span class="s1">&#39;agent_state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ignore_light</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_stuck_detector</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">])</span>
 
         <span class="n">obs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor_data</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ignore_light</span> <span class="ow">and</span> <span class="s1">&#39;birdview&#39;</span> <span class="ow">in</span> <span class="n">obs</span><span class="p">:</span>
-            <span class="n">obs</span><span class="p">[</span><span class="s1">&#39;birdview&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">obs</span><span class="p">[</span><span class="s1">&#39;birdview&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">obs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
             <span class="p">{</span>
                 <span class="s1">&#39;tick&#39;</span><span class="p">:</span> <span class="n">information</span><span class="p">[</span><span class="s1">&#39;tick&#39;</span><span class="p">],</span>
@@ -486,11 +403,16 @@
                 <span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]),</span>
                 <span class="s1">&#39;speed_limit&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">navigation</span><span class="p">[</span><span class="s1">&#39;speed_limit&#39;</span><span class="p">]),</span>
                 <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]),</span>
-                <span class="s1">&#39;orientation&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;orientation&#39;</span><span class="p">]),</span>
+                <span class="s1">&#39;forward_vector&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;forward_vector&#39;</span><span class="p">]),</span>
                 <span class="s1">&#39;acceleration&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;acceleration&#39;</span><span class="p">]),</span>
+                <span class="s1">&#39;velocity&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;velocity&#39;</span><span class="p">]),</span>
+                <span class="s1">&#39;angular_velocity&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;angular_velocity&#39;</span><span class="p">]),</span>
+                <span class="s1">&#39;rotation&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;rotation&#39;</span><span class="p">]),</span>
                 <span class="s1">&#39;is_junction&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;is_junction&#39;</span><span class="p">]),</span>
                 <span class="s1">&#39;tl_state&#39;</span><span class="p">:</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;tl_state&#39;</span><span class="p">],</span>
                 <span class="s1">&#39;tl_dis&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;tl_dis&#39;</span><span class="p">]),</span>
+                <span class="s1">&#39;waypoint_list&#39;</span><span class="p">:</span> <span class="n">navigation</span><span class="p">[</span><span class="s1">&#39;waypoint_list&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;direction_list&#39;</span><span class="p">:</span> <span class="n">navigation</span><span class="p">[</span><span class="s1">&#39;direction_list&#39;</span><span class="p">],</span>
             <span class="p">}</span>
         <span class="p">)</span>
 
@@ -526,7 +448,7 @@
         <span class="n">goal_reward</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">plan_distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulator</span><span class="o">.</span><span class="n">end_distance</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span><span class="p">():</span>
-            <span class="n">goal_reward</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_finish_reward</span>
+            <span class="n">goal_reward</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_success_reward</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_failure</span><span class="p">():</span>
             <span class="n">goal_reward</span> <span class="o">-=</span> <span class="o">-</span><span class="mi">1</span>
 
@@ -556,11 +478,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">speed_reward</span> <span class="o">=</span> <span class="mi">1</span>
 
-        <span class="n">orientation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">][</span><span class="s1">&#39;orientation&#39;</span><span class="p">]</span>
+        <span class="n">forward_vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">][</span><span class="s1">&#39;forward_vector&#39;</span><span class="p">]</span>
         <span class="n">target_forward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;navigation&#39;</span><span class="p">][</span><span class="s1">&#39;target_forward&#39;</span><span class="p">]</span>
-        <span class="n">angle_reward</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">angle</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">target_forward</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+        <span class="n">angle_reward</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">angle</span><span class="p">(</span><span class="n">forward_vector</span><span class="p">,</span> <span class="n">target_forward</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
 
-        <span class="n">steer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">][</span><span class="s1">&#39;steer&#39;</span><span class="p">]</span>
+        <span class="n">steer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;steer&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">command</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;navigation&#39;</span><span class="p">][</span><span class="s1">&#39;command&#39;</span><span class="p">]</span>
         <span class="n">steer_reward</span> <span class="o">=</span> <span class="mf">0.5</span>
         <span class="c1"># if abs(steer - self._last_steer) &gt; 0.5:</span>
@@ -603,7 +525,7 @@
 
         <span class="k">return</span> <span class="n">total_reward</span><span class="p">,</span> <span class="n">reward_info</span></div>
 
-<div class="viewcode-block" id="SimpleCarlaEnv.render"><a class="viewcode-back" href="../../../api_doc/envs.html#core.envs.SimpleCarlaEnv.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="SimpleCarlaEnv.render"><a class="viewcode-back" href="../../../api_doc/envs.html#core.envs.SimpleCarlaEnv.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rgb_array&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Render a runtime visualization on screen, save a gif or video according to visualizer config.</span>
 <span class="sd">        The main canvas is from a specific sensor data. It only works when &#39;visualize&#39; is set in config dict.</span>
@@ -628,7 +550,8 @@
         <span class="n">render_info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_simulator_databuffer</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">])</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_visualizer</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_render_buffer</span><span class="p">,</span> <span class="n">render_info</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_visualizer</span><span class="o">.</span><span class="n">run_visualize</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_visualizer</span><span class="o">.</span><span class="n">run_visualize</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_visualizer</span><span class="o">.</span><span class="n">canvas</span></div>
 
 <div class="viewcode-block" id="SimpleCarlaEnv.seed"><a class="viewcode-back" href="../../../api_doc/envs.html#core.envs.SimpleCarlaEnv.seed">[docs]</a>    <span class="k">def</span> <span class="nf">seed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -649,46 +572,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, OpenDILab.
-
-    </p>
+    <p>&#169; Copyright 2021, OpenDILab.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
