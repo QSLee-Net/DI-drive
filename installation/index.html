@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; DI-drive 0.3.1 documentation</title>
+  <title>Installation &mdash; DI-drive 0.3.4 documentation</title>
   
 
   
@@ -24,7 +25,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -62,7 +65,7 @@
             
             
               <div class="version">
-                0.3.1
+                0.3.4
               </div>
             
           
@@ -176,12 +179,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
 <p>System version:</p>
 <blockquote>
 <div><ul class="simple">
@@ -191,11 +194,11 @@
 </div></blockquote>
 <p>Python version: 3.6, 3.7</p>
 <p>PyTorch version: &gt;=1.4, &lt;=1.8</p>
-<p>DI-engine version: &gt;=0.2</p>
+<p>DI-engine version: &gt;=0.3.1</p>
 <p>Hardware requirements: NVIDIA GPU with at least 4GB memory <em>if you with to run Carla server</em></p>
-</div>
-<div class="section" id="get-and-install-di-drive">
-<h2>Get and install DI-drive<a class="headerlink" href="#get-and-install-di-drive" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="get-and-install-di-drive">
+<h2>Get and install DI-drive<a class="headerlink" href="#get-and-install-di-drive" title="Permalink to this heading">¶</a></h2>
 <p>First get and download the official repository with the following command line.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/opendilab/DI-drive.git
 </pre></div>
@@ -217,7 +220,7 @@ pip install <span class="s1">&#39;.[metadrive]&#39;</span> --user
 If any questions raised when install DI-engine, please follow
 <a class="reference external" href="https://opendilab.github.io/DI-engine/installation/index.html">DI-engine installation</a> for help.
 Or try to install manually via PyPI:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install di-engine<span class="o">==</span><span class="m">0</span>.2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install di-engine --user
 </pre></div>
 </div>
 <p>DI-drive supports both <strong>Carla</strong> and <strong>MetaDrive</strong>. If you want to use Carla, refer to the next section.
@@ -230,28 +233,28 @@ If you want to use MetaDrive, you can install DI-drive like above, or manually i
 <p>You can configure the simulator used by DI-drive in <code class="docutils literal notranslate"><span class="pre">core/__init__.py</span></code> .
 Only related modules will be imported in each file. By default all simulators are used.</p>
 </div>
-</div>
-<div class="section" id="additional-installation-for-carla">
-<h2>Additional Installation for Carla<a class="headerlink" href="#additional-installation-for-carla" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="download-and-install-carla-python-api">
-<h3>Download and install Carla Python API<a class="headerlink" href="#download-and-install-carla-python-api" title="Permalink to this headline">¶</a></h3>
-<p>DI-drive uses Carla simulator version 0.9.9. It is needed to install Carla Python API from their released pack.
+</section>
+<section id="additional-installation-for-carla">
+<h2>Additional Installation for Carla<a class="headerlink" href="#additional-installation-for-carla" title="Permalink to this heading">¶</a></h2>
+<section id="download-and-install-carla-python-api">
+<h3>Download and install Carla Python API<a class="headerlink" href="#download-and-install-carla-python-api" title="Permalink to this heading">¶</a></h3>
+<p>DI-drive uses Carla simulator version higher than 0.9.9. It is needed to install Carla Python API from their released pack.
 If you have any problem dealing with Carla, we record some common problem you may meet in the
 <a class="reference external" href="../faq/index.html">FAQ</a> page.</p>
 <ul class="simple">
 <li><p>download Carla released pack</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://carla-releases.s3.eu-west-3.amazonaws.com/Linux/CARLA_0.9.9.4.tar.gz
-mkdir carla_099
-tar -xvzf CARLA_0.9.9.4.tar.gz -C carla_099
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://carla-releases.s3.eu-west-3.amazonaws.com/Linux/CARLA_0.9.10.1.tar.gz
+mkdir carla_0910
+tar -xvzf CARLA_0.9.10.1.tar.gz -C carla_0910
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>install Carla Python API</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install compiled Carla 099 python api, then you can import Carla in python scripts</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install compiled Carla 0910 python api, then you can import Carla in python scripts</span>
 <span class="nb">cd</span> PythonAPI/carla/dist
-easy_install --user carla-0.9.9-py3.7-linux-x86_64.egg
+easy_install --user carla-0.9.10-py3.7-linux-x86_64.egg
 </pre></div>
 </div>
 <ul class="simple">
@@ -261,9 +264,9 @@ easy_install --user carla-0.9.9-py3.7-linux-x86_64.egg
 </pre></div>
 </div>
 <p>Then everything will be ok if no error raised.</p>
-</div>
-<div class="section" id="run-carla-server">
-<h3>Run Carla server<a class="headerlink" href="#run-carla-server" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="run-carla-server">
+<h3>Run Carla server<a class="headerlink" href="#run-carla-server" title="Permalink to this heading">¶</a></h3>
 <p>To use Carla simulator you need to run a Carla server and use its IP host and port to connect to it.</p>
 <ul class="simple">
 <li><p>run a Carla server</p></li>
@@ -285,9 +288,9 @@ You will see:</p>
 <p>If running successfully, you will see:</p>
 <img alt="installation_2" src="../_images/installation_2.png" />
 <p>Now you can use DI-drive to run code under this server.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

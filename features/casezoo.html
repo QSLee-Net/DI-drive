@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Carla Scenario and Casezoo Evaluation &mdash; DI-drive 0.3.1 documentation</title>
+  <title>Carla Scenario and Casezoo Evaluation &mdash; DI-drive 0.3.4 documentation</title>
   
 
   
@@ -24,7 +25,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -62,7 +65,7 @@
             
             
               <div class="version">
-                0.3.1
+                0.3.4
               </div>
             
           
@@ -181,8 +184,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="carla-scenario-and-casezoo-evaluation">
-<h1>Carla Scenario and Casezoo Evaluation<a class="headerlink" href="#carla-scenario-and-casezoo-evaluation" title="Permalink to this headline">¶</a></h1>
+  <section id="carla-scenario-and-casezoo-evaluation">
+<h1>Carla Scenario and Casezoo Evaluation<a class="headerlink" href="#carla-scenario-and-casezoo-evaluation" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <p>Carla ScenarioRunner is a module that allows traffic scenario definition and execution for the CARLA simulator.
@@ -192,8 +195,8 @@ DI-drive refer to the existing Carla <a class="reference external" href="https:/
 to set up scenarios, and add interfaces to suit for DI-drive, so as to run Deep Learning method easily.
 DI-drive also supports both ScenarioRunner’s example scenarios and routes. They can be run in the same way as
 follow.</p>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
 <p>Currently Deep Learning literatures in Carla simulator mostly use <strong>Benchmark</strong> env setting to train and evaluate
 their policies. Benchmark defines several suites of routes by a start and end point, divided into three difficulties. Each suite
 specifies running parameters like weathers and amount of other vehicles and walkers in environment. The ego-vehicle
@@ -221,9 +224,9 @@ This makes the RL training quickly and conveniently for users.</p>
 <li><p>Suitable for IL &amp; RL training</p></li>
 <li><p>Interacted with same interfaces in <code class="docutils literal notranslate"><span class="pre">Env</span></code></p></li>
 </ul>
-</div>
-<div class="section" id="running-guide">
-<h2>Running Guide<a class="headerlink" href="#running-guide" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="running-guide">
+<h2>Running Guide<a class="headerlink" href="#running-guide" title="Permalink to this heading">¶</a></h2>
 <p>The scenario defines a route to follow in <cite>Town03</cite>, <cite>Town04</cite> and <cite>Town05</cite>. The route is stored in a <cite>.xml</cite> file.
 There are also individual scenarios defined in <cite>python</cite> files. The individual scenario can be triggered when hero
 vehicle passes by during navigating in the route. The configuration os these scenarios in each route is stored in
@@ -266,8 +269,8 @@ common RL environments to train and evaluate.</p>
 single case to start an episode in scenario environments.</p>
 </div>
 <p>You can run auto policy in scenario environments with <code class="docutils literal notranslate"><span class="pre">demo/auto_run/auto_run_case.py</span></code></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

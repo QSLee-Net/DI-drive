@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>API Doc &mdash; DI-drive 0.3.1 documentation</title>
+  <title>API Doc &mdash; DI-drive 0.3.4 documentation</title>
   
 
   
@@ -24,7 +25,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -38,7 +41,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="simulators" href="simulators.html" />
-    <link rel="prev" title="MetaDrive Macro Environment" href="../model_zoo/md_macro.html" /> 
+    <link rel="prev" title="DREX in MetaDrive" href="../model_zoo/drex.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -62,7 +65,7 @@
             
             
               <div class="version">
-                0.3.1
+                0.3.4
               </div>
             
           
@@ -176,8 +179,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="api-doc">
-<h1>API Doc<a class="headerlink" href="#api-doc" title="Permalink to this headline">¶</a></h1>
+  <section id="api-doc">
+<h1>API Doc<a class="headerlink" href="#api-doc" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="simulators.html">simulators</a><ul>
@@ -191,6 +194,7 @@
 <li class="toctree-l2"><a class="reference internal" href="envs.html#simplecarlaenv">SimpleCarlaEnv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="envs.html#scenariocarlaenv">ScenarioCarlaEnv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="envs.html#metadrivemacroenv">MetaDriveMacroEnv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="envs.html#metadrivetrajenv">MetaDriveTrajEnv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="envs.html#driveenvwrapper">DriveEnvWrapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="envs.html#benchmarkenvwrapper">BenchmarkEnvWrapper</a></li>
 </ul>
@@ -224,18 +228,39 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#basicplanner">BasicPlanner</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#behaviorplanner">BehaviorPlanner</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#visualizer">Visualizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#stuckdetector">StuckDetector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#sensorhelper">SensorHelper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#collisionsensor">CollisionSensor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#trafficlighthelper">TrafficLightHelper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#basicplanner">BasicPlanner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#core.utils.planner.basic_planner.BasicPlanner"><code class="docutils literal notranslate"><span class="pre">BasicPlanner</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#behaviorplanner">BehaviorPlanner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#core.utils.planner.behavior_planner.BehaviorPlanner"><code class="docutils literal notranslate"><span class="pre">BehaviorPlanner</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#visualizer">Visualizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#core.utils.others.visualizer.Visualizer"><code class="docutils literal notranslate"><span class="pre">Visualizer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#stuckdetector">StuckDetector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#core.utils.env_utils.stuck_detector.StuckDetector"><code class="docutils literal notranslate"><span class="pre">StuckDetector</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#sensorhelper">SensorHelper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#core.utils.simulator_utils.sensor_utils.SensorHelper"><code class="docutils literal notranslate"><span class="pre">SensorHelper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#collisionsensor">CollisionSensor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#core.utils.simulator_utils.sensor_utils.CollisionSensor"><code class="docutils literal notranslate"><span class="pre">CollisionSensor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#trafficlighthelper">TrafficLightHelper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#core.utils.simulator_utils.sensor_utils.TrafficLightHelper"><code class="docutils literal notranslate"><span class="pre">TrafficLightHelper</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
+</section>
 
 
            </div>
@@ -248,7 +273,7 @@
         <a href="simulators.html" class="btn btn-neutral float-right" title="simulators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../model_zoo/md_macro.html" class="btn btn-neutral float-left" title="MetaDrive Macro Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../model_zoo/drex.html" class="btn btn-neutral float-left" title="DREX in MetaDrive" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

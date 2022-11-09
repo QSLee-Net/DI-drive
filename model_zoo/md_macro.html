@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MetaDrive Macro Environment &mdash; DI-drive 0.3.1 documentation</title>
+  <title>MetaDrive Macro Environment &mdash; DI-drive 0.3.4 documentation</title>
   
 
   
@@ -24,7 +25,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -37,7 +40,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="API Doc" href="../api_doc/index.html" />
+    <link rel="next" title="DREX in MetaDrive" href="drex.html" />
     <link rel="prev" title="Latent Reinforcement Learning" href="latent_rl.html" /> 
 </head>
 
@@ -62,7 +65,7 @@
             
             
               <div class="version">
-                0.3.1
+                0.3.4
               </div>
             
           
@@ -184,8 +187,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="metadrive-macro-environment">
-<h1>MetaDrive Macro Environment<a class="headerlink" href="#metadrive-macro-environment" title="Permalink to this headline">¶</a></h1>
+  <section id="metadrive-macro-environment">
+<h1>MetaDrive Macro Environment<a class="headerlink" href="#metadrive-macro-environment" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <p>MetaDrive Macro Environment is a control option based RL environment on MetaDrive.
@@ -195,8 +198,8 @@ vehicles. The env use a top-down view as input and outputs a discrete macro acti
 The macro action takes effect in a following time period in simulator, and the vehicle
 is drived by a IDM policy that can achieve the target macro action.</p>
 <a class="reference internal image-reference" href="../_images/macro_demo1.gif"><img alt="macro_demo1" class="align-center" src="../_images/macro_demo1.gif" style="width: 500px;" /></a>
-<div class="section" id="environments">
-<h2>Environments<a class="headerlink" href="#environments" title="Permalink to this headline">¶</a></h2>
+<section id="environments">
+<h2>Environments<a class="headerlink" href="#environments" title="Permalink to this heading">¶</a></h2>
 <p>The environment is established following the standard <code class="docutils literal notranslate"><span class="pre">gym.Env</span></code> form. Detail information
 is listed below.</p>
 <p>The state of macro env is Top-down Sematic Maps containing 5 channels:</p>
@@ -223,9 +226,9 @@ is listed below.</p>
 <li><p>Hold speed</p></li>
 </ul>
 <p>Each action costs 30 system timestep, and is converted to control signals through a PID controller.</p>
-</div>
-<div class="section" id="training-test">
-<h2>Training &amp; Test<a class="headerlink" href="#training-test" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="training-test">
+<h2>Training &amp; Test<a class="headerlink" href="#training-test" title="Permalink to this heading">¶</a></h2>
 <p>All the entry can be found in <code class="docutils literal notranslate"><span class="pre">demo/metadrive</span></code></p>
 <p>DI-drive provide two RL policy training entries: DQN and Discrete PPO. Run the following
 scripts to start training DQN demos.</p>
@@ -250,8 +253,8 @@ scripts to start training DQN demos.</p>
 <p>You may need to change the checkpoint path in config. Here we provide a pre-trained
 DQN weights as example.</p>
 <p><a class="reference external" href="http://opendilab.org/download/DI-drive/metadrive/iteration_40000.pth.tar">iteration_40000.pth.tar</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -261,7 +264,7 @@ DQN weights as example.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api_doc/index.html" class="btn btn-neutral float-right" title="API Doc" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="drex.html" class="btn btn-neutral float-right" title="DREX in MetaDrive" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="latent_rl.html" class="btn btn-neutral float-left" title="Latent Reinforcement Learning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

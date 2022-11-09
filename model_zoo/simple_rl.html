@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>BeV Speed End-to-end Reinforcement Learning &mdash; DI-drive 0.3.1 documentation</title>
+  <title>BeV Speed End-to-end Reinforcement Learning &mdash; DI-drive 0.3.4 documentation</title>
   
 
   
@@ -24,7 +25,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -62,7 +65,7 @@
             
             
               <div class="version">
-                0.3.1
+                0.3.4
               </div>
             
           
@@ -185,8 +188,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="bev-speed-end-to-end-reinforcement-learning">
-<h1>BeV Speed End-to-end Reinforcement Learning<a class="headerlink" href="#bev-speed-end-to-end-reinforcement-learning" title="Permalink to this headline">¶</a></h1>
+  <section id="bev-speed-end-to-end-reinforcement-learning">
+<h1>BeV Speed End-to-end Reinforcement Learning<a class="headerlink" href="#bev-speed-end-to-end-reinforcement-learning" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <p>This is a simple Reinforcement Learning demo to show the basic usage of <strong>DI-drive</strong> environments
@@ -196,8 +199,8 @@ and <strong>DI-engine</strong> RL policies. All training, evaluation and testing
 <a class="reference internal image-reference" href="../_images/dqn_demo2.gif"><img alt="dqn_demo2" src="../_images/dqn_demo2.gif" style="width: 250px;" /></a>
 <a class="reference internal image-reference" href="../_images/dqn_demo3.gif"><img alt="dqn_demo3" src="../_images/dqn_demo3.gif" style="width: 250px;" /></a>
 <a class="reference internal image-reference" href="../_images/dqn_demo4.gif"><img alt="dqn_demo4" src="../_images/dqn_demo4.gif" style="width: 250px;" /></a>
-<div class="section" id="inputs-nn-models-and-policies">
-<h2>Inputs, NN models and Policies<a class="headerlink" href="#inputs-nn-models-and-policies" title="Permalink to this headline">¶</a></h2>
+<section id="inputs-nn-models-and-policies">
+<h2>Inputs, NN models and Policies<a class="headerlink" href="#inputs-nn-models-and-policies" title="Permalink to this heading">¶</a></h2>
 <p>The simple RL policy takes a Bird-eye View(BeV) image with size of 32x32x5 and speed scalar as observations.
 The BeV image consists of roads, lanes, vehicles, pedestrians and target route. Each occupies a channel
 with 0-1 value. The traffic light information is excluded from observations.</p>
@@ -210,9 +213,9 @@ define NN models similarly.</p>
 <p>Currently we have DQN, DDPG, TD3, SAC and PPO demos. We provide training and evaluation entry for all of
 them. All these policies are implemented from <strong>DI-engine</strong> standard policy zoo. You can refer to
 <strong>DI-engine</strong>’s document to get how to modify the training hyper-parameters in config.</p>
-</div>
-<div class="section" id="environment">
-<h2>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="environment">
+<h2>Environment<a class="headerlink" href="#environment" title="Permalink to this heading">¶</a></h2>
 <p>The simple RL experiments use the environment instance <code class="docutils literal notranslate"><span class="pre">SimpleCarlaEnv</span></code> which is well defined with
 specified inputs and outputs.  The standard usage to customize the env interfaces is to add <code class="docutils literal notranslate"><span class="pre">EnvWrapper</span></code>
 and change the input, output, reward of Env. For example:</p>
@@ -255,9 +258,9 @@ traffic signal channels in BeV image. Other wrappers work in the same way.</p>
 <p>We have tried amounts of reward shaping and add varies kinds of reward function in the Env. By default
 only [‘goal’, ‘distance’, ‘speed’, ‘angle’, ‘failure’] 5 types of reward is taken into account. You
 can modify the reward types you want to use via config.</p>
-</div>
-<div class="section" id="training-and-evaluation">
-<h2>Training and Evaluation<a class="headerlink" href="#training-and-evaluation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="training-and-evaluation">
+<h2>Training and Evaluation<a class="headerlink" href="#training-and-evaluation" title="Permalink to this heading">¶</a></h2>
 <p>The entry files of all the RL methods are written in standard distributed way using <strong>DI-engine</strong> to run RL experiments.
 The sub-process env manager in <strong>Di-engine</strong> is used to run multi-env in parallel.
 Off-policy methods use <code class="docutils literal notranslate"><span class="pre">collector</span></code>, <code class="docutils literal notranslate"><span class="pre">learner</span></code>, <code class="docutils literal notranslate"><span class="pre">replay</span> <span class="pre">buffer</span></code> in <strong>DI-engine</strong> and <code class="docutils literal notranslate"><span class="pre">evaluator</span></code> in DI-drive.
@@ -283,9 +286,10 @@ method has different <code class="docutils literal notranslate"><span class="pre
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_policy_collect</span><span class="p">(</span><span class="n">collector</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">_collect</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;train_iter&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">new_data</span> <span class="o">=</span> <span class="n">collector</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="n">n_sample</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">train_iter</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">train_iter</span><span class="p">)</span>
+        <span class="n">new_data</span> <span class="o">=</span> <span class="n">collector</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="n">train_iter</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">train_iter</span><span class="p">)</span>
         <span class="n">unpack_birdview</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">new_data</span> <span class="o">=</span> <span class="n">new_data</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">envstep</span> <span class="o">=</span> <span class="n">collector</span><span class="o">.</span><span class="n">envstep</span>
     <span class="k">return</span> <span class="n">_collect</span>
 </pre></div>
 </div>
@@ -300,6 +304,7 @@ method has different <code class="docutils literal notranslate"><span class="pre
             <span class="n">new_data</span> <span class="o">=</span> <span class="n">collector</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="n">train_iter</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">train_iter</span><span class="p">)</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">update_per_collect</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span> <span class="o">//</span> <span class="n">cfg</span><span class="o">.</span><span class="n">policy</span><span class="o">.</span><span class="n">learn</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">*</span> <span class="mi">4</span>
         <span class="n">replay_buffer</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">new_data</span><span class="p">,</span> <span class="n">cur_collector_envstep</span><span class="o">=</span><span class="n">collector</span><span class="o">.</span><span class="n">envstep</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">envstep</span> <span class="o">=</span> <span class="n">collector</span><span class="o">.</span><span class="n">envstep</span>
     <span class="k">return</span> <span class="n">_collect</span>
 </pre></div>
 </div>
@@ -307,8 +312,7 @@ method has different <code class="docutils literal notranslate"><span class="pre
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">evaluator</span><span class="p">,</span> <span class="n">learner</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">_evaluate</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;envstep&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Avoid attribute not existing</span>
-        <span class="n">ctx</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;train_iter&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">should_eval</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">train_iter</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">should_eval</span><span class="p">(</span><span class="n">learner</span><span class="o">.</span><span class="n">train_iter</span><span class="p">):</span>
             <span class="n">stop</span><span class="p">,</span> <span class="n">rate</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">learner</span><span class="o">.</span><span class="n">save_checkpoint</span><span class="p">,</span> <span class="n">learner</span><span class="o">.</span><span class="n">train_iter</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">envstep</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">stop</span><span class="p">:</span>
                 <span class="n">task</span><span class="o">.</span><span class="n">finish</span> <span class="o">=</span> <span class="kc">True</span>
@@ -333,6 +337,7 @@ method has different <code class="docutils literal notranslate"><span class="pre
                     <span class="n">learner</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">envstep</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">policy</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;priority&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
                     <span class="n">replay_buffer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">learner</span><span class="o">.</span><span class="n">priority_info</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">train_iter</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">train_iter</span>
     <span class="k">return</span> <span class="n">_train</span>
 </pre></div>
 </div>
@@ -341,8 +346,11 @@ evaluation and close-loop driving test. The former one is to evaluate the genera
 of a policy in a benchmark suite, the latter one is mostly used to visualize driving results in a route.
 They can be implement using <code class="docutils literal notranslate"><span class="pre">CarlaBenchmarkEvaluator</span></code> and <code class="docutils literal notranslate"><span class="pre">SerialEvaluator</span></code> separately.</p>
 <p>For more details, it is recommended to check the <a class="reference external" href="../api_doc/index.html">API doc</a> for the modules above.</p>
-</div>
-</div>
+<p>We provide pre-train weights of DQN policy that can be evaluated and visualized directly as well as a
+performance reference of your training.
+<a class="reference external" href="http://opendilab.org/download/DI-drive/simple_rl/Plus25.pth">link</a></p>
+</section>
+</section>
 
 
            </div>
